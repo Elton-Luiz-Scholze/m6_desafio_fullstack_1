@@ -31,7 +31,7 @@ const setDataSourceOptions = (): DataSourceOptions => {
     host: process.env.PG_HOST,
     port: port,
     username: process.env.PG_USER,
-    password: String(process.env.PG_PASSWORD),
+    password: process.env.PG_PASSWORD,
     database: process.env.PG_DB,
     logging: true,
     synchronize: false,
