@@ -17,3 +17,5 @@ export const returnClientSchema: yup.Schema<IClientRes> = yup.object().shape({
   createdAt: yup.date(),
   updatedAt: yup.date(),
 });
+
+export const returnAllClientsSchema = yup.array(returnClientSchema);

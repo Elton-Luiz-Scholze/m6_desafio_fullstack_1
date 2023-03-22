@@ -1,6 +1,9 @@
 import { IClientReq } from "../interfaces";
 import { clientRepository } from "../repositories/clientRepository";
-import { returnClientSchema } from "../schemas/clientSchemas";
+import {
+  returnAllClientsSchema,
+  returnClientSchema,
+} from "../schemas/clientSchemas";
 
 export const createClientService = async (data: IClientReq) => {
   const newClient = clientRepository.create(data);
@@ -12,4 +15,14 @@ export const createClientService = async (data: IClientReq) => {
   });
 
   return returnedNewClient;
+};
+
+export const listAllClientsService = async () => {
+  const findClients = await clientRepository.find();
+
+  const returnedClients = await returnAllClientsSchema.validate(findClients, {
+    stripUnknown: true,
+  });
+
+  return returnedClients;
 };

@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createClientController } from "../controllers/clientControllers";
+import {
+  createClientController,
+  listAllClientsController,
+} from "../controllers/clientControllers";
 import { validateDataMiddleware } from "../middlewares/validateSerializer.middleware";
 import { createClientSchema } from "../schemas/clientSchemas";
 
@@ -10,3 +13,4 @@ clientRoutes.post(
   validateDataMiddleware(createClientSchema),
   createClientController,
 );
+clientRoutes.get("", listAllClientsController);
