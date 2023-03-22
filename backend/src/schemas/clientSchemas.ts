@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { IClientReq, IClientRes } from "../interfaces";
+import { IClientLogin, IClientReq, IClientRes } from "../interfaces";
 
 export const createClientSchema: yup.Schema<IClientReq> = yup.object().shape({
   name: yup.string().max(200).trim().required(),
@@ -19,3 +19,8 @@ export const returnClientSchema: yup.Schema<IClientRes> = yup.object().shape({
 });
 
 export const returnAllClientsSchema = yup.array(returnClientSchema);
+
+export const loginSchema: yup.Schema<IClientLogin> = yup.object().shape({
+  email: yup.string().email().trim().required(),
+  password: yup.string().trim().required(),
+});
