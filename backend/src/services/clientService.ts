@@ -27,6 +27,16 @@ export const listAllClientsService = async () => {
   return returnedClients;
 };
 
+export const listProfileService = async (id: string) => {
+  const findClient = await clientRepository.findOneByOrFail({ id: id });
+
+  const returnedClient = await returnClientSchema.validate(findClient, {
+    stripUnknown: true,
+  });
+
+  return returnedClient;
+};
+
 export const updateClientService = async (data: IClientUpdate, id: string) => {
   const findClient = await clientRepository.findOneByOrFail({ id: id });
 

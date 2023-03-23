@@ -3,6 +3,7 @@ import {
   createClientService,
   deleteClientService,
   listAllClientsService,
+  listProfileService,
   updateClientService,
 } from "../services/clientService";
 
@@ -16,6 +17,13 @@ export const listAllClientsController = async (req: Request, res: Response) => {
   const clients = await listAllClientsService();
 
   return res.json(clients);
+};
+
+export const listProfileController = async (req: Request, res: Response) => {
+  const id = req.client.id;
+  const client = await listProfileService(id);
+
+  return res.json(client);
 };
 
 export const updateClientController = async (req: Request, res: Response) => {
