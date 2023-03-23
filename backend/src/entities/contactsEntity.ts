@@ -22,16 +22,13 @@ class Contact {
   @Column()
   phone: string;
 
-  @Column({ default: true })
-  isActive: boolean;
-
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Client, (client) => client.contact)
+  @ManyToOne(() => Client, (client) => client.contact, { onDelete: "CASCADE" })
   client: Client;
 }
 

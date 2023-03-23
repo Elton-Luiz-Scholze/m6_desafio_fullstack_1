@@ -76,3 +76,26 @@ export const updateContactService = async (
 
   return returnedUpdatedContact;
 };
+
+export const deleteContactServices = async (
+  clientId: string,
+  contactId: string,
+): Promise<void> => {
+  const findContact = await contactRepository.findOne({
+    relations: {
+      client: true,
+    },
+    where: {
+      id: contactId,
+    },
+  });
+
+  if (findContact?.client.id !== clientId) {
+    throw new AppError(
+      401,
+      "You are not allowed to delete a contact that is not yours.",
+    );
+  }
+
+  await contactRepository.remove(findContact!);
+};
