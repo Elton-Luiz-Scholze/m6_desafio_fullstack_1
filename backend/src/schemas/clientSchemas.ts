@@ -1,5 +1,10 @@
 import * as yup from "yup";
-import { IClientLogin, IClientReq, IClientRes } from "../interfaces";
+import {
+  IClientLogin,
+  IClientReq,
+  IClientRes,
+  IClientUpdate,
+} from "../interfaces";
 
 export const createClientSchema: yup.Schema<IClientReq> = yup.object().shape({
   name: yup.string().max(200).trim().required(),
@@ -24,3 +29,12 @@ export const loginSchema: yup.Schema<IClientLogin> = yup.object().shape({
   email: yup.string().email().trim().required(),
   password: yup.string().trim().required(),
 });
+
+export const updateClientSchema: yup.Schema<IClientUpdate> = yup
+  .object()
+  .shape({
+    name: yup.string(),
+    email: yup.string().email(),
+    password: yup.string().trim(),
+    phone: yup.string(),
+  });

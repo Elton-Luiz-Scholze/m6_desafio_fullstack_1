@@ -1,8 +1,9 @@
-import { IClientReq } from "../interfaces";
+import { IClientReq, IClientUpdate } from "../interfaces";
 import { clientRepository } from "../repositories/clientRepository";
 import {
   returnAllClientsSchema,
   returnClientSchema,
+  updateClientSchema,
 } from "../schemas/clientSchemas";
 
 export const createClientService = async (data: IClientReq) => {
@@ -25,4 +26,21 @@ export const listAllClientsService = async () => {
   });
 
   return returnedClients;
+};
+
+export const updateClientService = async (data: IClientUpdate, id: string) => {
+  const findClient = await clientRepository.findOneByOrFail({ id: id });
+
+  const patchedClient = clientRepository.create({
+    ...findClient,
+    ...data,
+  });
+
+  await clientRepository.save(patchedClient);
+
+  const returnPatchedClient = await returnClientSchema.validate(patchedClient, {
+    stripUnknown: true,
+  });
+
+  return returnPatchedClient;
 };
