@@ -25,6 +25,8 @@ export const returnContactSchema: yup.Schema<IContactRes> = yup.object().shape({
   }),
 });
 
+export const returnedAllContactsSchema = yup.array(returnContactSchema);
+
 export const updateContactSchema: yup.Schema<IContactUpdate> = yup
   .object()
   .shape({
