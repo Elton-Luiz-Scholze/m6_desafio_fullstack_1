@@ -1,9 +1,11 @@
-import { IContactReq } from "../interfaces/contacts";
+import { AppError } from "../errors/errors";
+import { IContactReq, IContactUpdate } from "../interfaces/contacts";
 import { clientRepository } from "../repositories/clientRepository";
 import { contactRepository } from "../repositories/contactRepository";
 import {
   returnContactSchema,
   returnedAllContactsSchema,
+  updateContactSchema,
 } from "../schemas/contactSchemas";
 
 export const createContactService = async (data: IContactReq, id: string) => {
@@ -35,4 +37,42 @@ export const listAllContactsService = async () => {
   );
 
   return returnedContacts;
+};
+
+export const updateContactService = async (
+  data: IContactUpdate,
+  clientId: string,
+  contactId: string,
+) => {
+  const findContact = await contactRepository.findOne({
+    relations: {
+      client: true,
+    },
+    where: {
+      id: contactId,
+    },
+  });
+
+  if (findContact?.client.id !== clientId) {
+    throw new AppError(
+      401,
+      "You are not allowed to change a contact that is not yours",
+    );
+  }
+
+  const updatedContact = contactRepository.create({
+    ...findContact,
+    ...data,
+  });
+
+  await contactRepository.save(updatedContact);
+
+  const returnedUpdatedContact = await updateContactSchema.validate(
+    updatedContact,
+    {
+      stripUnknown: true,
+    },
+  );
+
+  return returnedUpdatedContact;
 };

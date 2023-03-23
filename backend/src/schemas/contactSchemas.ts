@@ -33,4 +33,8 @@ export const updateContactSchema: yup.Schema<IContactUpdate> = yup
     name: yup.string().trim(),
     email: yup.string().email().trim(),
     phone: yup.string().trim(),
+    client: yup.object().shape({
+      id: yup.string(),
+      name: yup.string(),
+    }),
   });
