@@ -3,6 +3,7 @@ import {
   createClientController,
   deleteClientController,
   listAllClientsController,
+  listProfileController,
   updateClientController,
 } from "../controllers/clientControllers";
 import { validateAuthTokenMiddleware } from "../middlewares/validateAuthTokenMiddleware";
@@ -20,6 +21,11 @@ clientRoutes.post(
   createClientController,
 );
 clientRoutes.get("", listAllClientsController);
+clientRoutes.get(
+  "/profile",
+  validateAuthTokenMiddleware,
+  listProfileController,
+);
 clientRoutes.patch(
   "",
   validateAuthTokenMiddleware,
