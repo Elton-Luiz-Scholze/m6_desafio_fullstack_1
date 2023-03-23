@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createClientController,
+  deleteClientController,
   listAllClientsController,
   updateClientController,
 } from "../controllers/clientControllers";
@@ -25,3 +26,4 @@ clientRoutes.patch(
   validateSchemaMiddleware(updateClientSchema),
   updateClientController,
 );
+clientRoutes.delete("", validateAuthTokenMiddleware, deleteClientController);

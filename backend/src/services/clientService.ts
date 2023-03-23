@@ -3,7 +3,6 @@ import { clientRepository } from "../repositories/clientRepository";
 import {
   returnAllClientsSchema,
   returnClientSchema,
-  updateClientSchema,
 } from "../schemas/clientSchemas";
 
 export const createClientService = async (data: IClientReq) => {
@@ -43,4 +42,12 @@ export const updateClientService = async (data: IClientUpdate, id: string) => {
   });
 
   return returnPatchedClient;
+};
+
+export const deleteClientService = async (id: string): Promise<void> => {
+  const findClient = await clientRepository.findOneByOrFail({ id: id });
+
+  findClient.isActive = false;
+
+  await clientRepository.save(findClient);
 };
