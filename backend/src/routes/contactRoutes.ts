@@ -6,10 +6,16 @@ import {
   updateContactController,
 } from "../controllers/contactsController";
 import { validateAuthTokenMiddleware } from "../middlewares/validateAuthTokenMiddleware";
+import { verifyContactAlreadyExists } from "../middlewares/verifyContactAlreadyExists copy";
 
 export const contactRoutes = Router();
 
-contactRoutes.post("", validateAuthTokenMiddleware, createContactController);
+contactRoutes.post(
+  "",
+  verifyContactAlreadyExists,
+  validateAuthTokenMiddleware,
+  createContactController,
+);
 contactRoutes.get("", listAllContactsController);
 contactRoutes.patch(
   "/:id",
