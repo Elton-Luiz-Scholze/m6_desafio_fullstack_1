@@ -1,3 +1,5 @@
+import { IContact } from "./contacts";
+
 export interface IClientReq {
   name: string;
   email: string;
@@ -13,6 +15,7 @@ export interface IClientRes {
   isActive?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  contact?: IContact[];
 }
 
 export interface IClientLogin {

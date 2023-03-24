@@ -5,6 +5,7 @@ import {
   IClientRes,
   IClientUpdate,
 } from "../interfaces";
+import { ContactSchema } from "./contactSchemas";
 
 export const createClientSchema: yup.Schema<IClientReq> = yup.object().shape({
   name: yup.string().max(200).trim().required(),
@@ -21,6 +22,7 @@ export const returnClientSchema: yup.Schema<IClientRes> = yup.object().shape({
   isActive: yup.boolean(),
   createdAt: yup.date(),
   updatedAt: yup.date(),
+  contact: yup.array(ContactSchema),
 });
 
 export const returnAllClientsSchema = yup.array(returnClientSchema);
