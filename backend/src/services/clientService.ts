@@ -18,7 +18,11 @@ export const createClientService = async (data: IClientReq) => {
 };
 
 export const listAllClientsService = async () => {
-  const findClients = await clientRepository.find();
+  const findClients = await clientRepository.find({
+    relations: {
+      contact: true,
+    },
+  });
 
   const returnedClients = await returnAllClientsSchema.validate(findClients, {
     stripUnknown: true,
@@ -28,7 +32,12 @@ export const listAllClientsService = async () => {
 };
 
 export const listProfileService = async (id: string) => {
-  const findClient = await clientRepository.findOneByOrFail({ id: id });
+  const findClient = await clientRepository.findOne({
+    relations: {
+      contact: true,
+    },
+    where: { id: id },
+  });
 
   const returnedClient = await returnClientSchema.validate(findClient, {
     stripUnknown: true,

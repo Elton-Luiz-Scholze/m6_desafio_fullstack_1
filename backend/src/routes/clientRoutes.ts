@@ -8,6 +8,7 @@ import {
 } from "../controllers/clientControllers";
 import { validateAuthTokenMiddleware } from "../middlewares/validateAuthTokenMiddleware";
 import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware";
+import { verifyUserAlreadyExists } from "../middlewares/verifyUserAlreadyExists";
 import {
   createClientSchema,
   updateClientSchema,
@@ -17,6 +18,7 @@ export const clientRoutes = Router();
 
 clientRoutes.post(
   "",
+  verifyUserAlreadyExists,
   validateSchemaMiddleware(createClientSchema),
   createClientController,
 );

@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import {
+  IContact,
   IContactReq,
   IContactRes,
   IContactUpdate,
@@ -9,6 +10,13 @@ export const createContactSchema: yup.Schema<IContactReq> = yup.object().shape({
   name: yup.string().max(200).trim().required(),
   email: yup.string().email().trim().max(200).required(),
   phone: yup.string().trim().required(),
+});
+
+export const ContactSchema: yup.Schema<IContact> = yup.object().shape({
+  id: yup.string(),
+  name: yup.string(),
+  email: yup.string().email(),
+  phone: yup.string(),
 });
 
 export const returnContactSchema: yup.Schema<IContactRes> = yup.object().shape({

@@ -4,6 +4,13 @@ export interface IContactReq {
   phone: string;
 }
 
+export interface IContact {
+  id?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+}
+
 export interface IContactRes {
   id?: string;
   name?: string;
