@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { AppError } from "../errors/errors";
 import { clientRepository } from "../repositories/clientRepository";
 
-export const verifyUserAlreadyExists = async (
+export const verifyClientAlreadyExists = async (
   req: Request,
   res: Response,
   next: NextFunction,
