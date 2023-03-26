@@ -14,6 +14,7 @@ export interface IClientRes {
   isActive?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  contacts?: IContact[];
 }
 
 export interface IClientLogin {
@@ -27,4 +28,11 @@ export interface IClientUpdate {
   password?: string;
   phone?: string;
   isActive?: boolean;
+}
+
+export interface IContact {
+  id?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
 }
