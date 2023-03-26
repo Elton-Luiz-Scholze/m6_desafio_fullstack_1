@@ -6,9 +6,12 @@ import "reflect-metadata";
 import { errorHandler } from "./errors/errors";
 import { loginRoute } from "./routes/loginRoute";
 import { contactRoutes } from "./routes/contactRoutes";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 app.use("/client", clientRoutes);
 app.use("/contact", contactRoutes);
 app.use("/login", loginRoute);
