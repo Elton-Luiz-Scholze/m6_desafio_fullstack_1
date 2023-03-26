@@ -11,7 +11,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { IClientLogin, IClientRegister, IClientRes } from "../interfaces";
 import { RequestClientProfile } from "../requests/RequestClientProfile";
-
 import { RequestClientRegister } from "../requests/RequestClientRegister";
 import { RequestLogin } from "../requests/RequestLogin";
 
@@ -24,6 +23,7 @@ interface IClientContext {
   login: (loginData: IClientLogin) => void;
   client: IClientRes | null;
   setClient: Dispatch<SetStateAction<IClientRes | null>>;
+  logout: () => void;
 }
 
 export const ClientContext = createContext({} as IClientContext);
@@ -105,9 +105,15 @@ export function ClientProvider({ children }: IClientContextProps) {
       });
     }
   }
+
+  async function logout() {
+    localStorage.removeItem("@desafio_token");
+    navigate("/login");
+  }
+
   return (
     <ClientContext.Provider
-      value={{ client, setClient, clientRegister, login }}
+      value={{ client, setClient, clientRegister, login, logout }}
     >
       {children}
     </ClientContext.Provider>
