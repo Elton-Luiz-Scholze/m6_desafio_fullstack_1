@@ -15,5 +15,7 @@ export const loginService = async (data: IClientLogin) => {
     subject: client.id,
   });
 
-  return { token: token };
+  const { password, ...rest } = client;
+
+  return { token: token, client: rest };
 };
