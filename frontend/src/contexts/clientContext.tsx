@@ -13,6 +13,7 @@ import { IClientLogin, IClientRegister, IClientRes } from "../interfaces";
 import { RequestClientProfile } from "../requests/RequestClientProfile";
 import { RequestClientRegister } from "../requests/RequestClientRegister";
 import { RequestDeleteClient } from "../requests/RequestDeleteClient";
+import { RequestDeleteContact } from "../requests/RequestDeleteContact";
 import { RequestLogin } from "../requests/RequestLogin";
 
 interface IClientContextProps {
@@ -26,6 +27,7 @@ interface IClientContext {
   setClient: Dispatch<SetStateAction<IClientRes | null>>;
   logout: () => void;
   deleteClient: () => void;
+  deleteContact: (contactId: string) => void;
 }
 
 export const ClientContext = createContext({} as IClientContext);
@@ -137,9 +139,39 @@ export function ClientProvider({ children }: IClientContextProps) {
     }
   }
 
+  async function deleteContact(contactId: string) {
+    const token = localStorage.getItem("@desafio_token");
+    try {
+      await RequestDeleteContact(token!, contactId);
+      toast({
+        title: "Contato deletado com sucesso",
+        position: "top-right",
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+    } catch {
+      toast({
+        title: "Ocorreu um erro ao tentar excluir seu contato!",
+        position: "top-right",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
+    }
+  }
+
   return (
     <ClientContext.Provider
-      value={{ client, setClient, clientRegister, login, logout, deleteClient }}
+      value={{
+        client,
+        setClient,
+        clientRegister,
+        login,
+        logout,
+        deleteClient,
+        deleteContact,
+      }}
     >
       {children}
     </ClientContext.Provider>
