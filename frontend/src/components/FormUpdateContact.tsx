@@ -15,7 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../contexts/clientContext";
-import { IClientUpdate, IContactUpdate } from "../interfaces";
+import { IContactUpdate } from "../interfaces";
 import { updateSchema } from "../schemas/updateSchema";
 
 interface IProps {

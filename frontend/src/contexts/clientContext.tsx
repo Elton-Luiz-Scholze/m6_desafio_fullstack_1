@@ -68,6 +68,7 @@ export function ClientProvider({ children }: IClientContextProps) {
           navigate("/dashboard");
         } catch {
           localStorage.removeItem("@desafio_token");
+          navigate("/login", { replace: true });
           toast({
             title: "Ops! Algo deu errado",
             position: "top-right",
@@ -75,7 +76,6 @@ export function ClientProvider({ children }: IClientContextProps) {
             duration: 2500,
             isClosable: true,
           });
-          navigate("/");
         }
       }
     }
@@ -117,7 +117,7 @@ export function ClientProvider({ children }: IClientContextProps) {
         duration: 2500,
         isClosable: true,
       });
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch {
       toast({
         title: "Email ou senha inválidos",
