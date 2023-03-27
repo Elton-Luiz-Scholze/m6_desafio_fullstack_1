@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { FormCreateContact } from "../components/FormCreateContact";
 import { FormUpdate } from "../components/FormUpdate";
+import { FormUpdateContact } from "../components/FormUpdateContact";
 import { useUserContext } from "../contexts/clientContext";
 
 export const Dashboard = () => {
@@ -107,7 +108,7 @@ export const Dashboard = () => {
                   <Text>Phone: {phone}</Text>
                 </CardBody>
                 <CardFooter gap={4}>
-                  <Button>Atualizar contato</Button>
+                  <FormUpdateContact contactId={id!} />
                   <Button onClick={() => deleteContact(id!)}>
                     Excluir contato
                   </Button>

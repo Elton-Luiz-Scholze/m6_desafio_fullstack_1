@@ -16,10 +16,12 @@ import {
   IClientUpdate,
   IContact,
   IContactCreate,
+  IContactUpdate,
 } from "../interfaces";
 import { RequestClientProfile } from "../requests/RequestClientProfile";
 import { RequestClientRegister } from "../requests/RequestClientRegister";
 import { RequestClientUpdate } from "../requests/RequestClientUpdate";
+import { RequestContactUpdated } from "../requests/RequestContactUpdate";
 import { RequestCreateContact } from "../requests/RequestCreateContact";
 import { RequestDeleteClient } from "../requests/RequestDeleteClient";
 import { RequestDeleteContact } from "../requests/RequestDeleteContact";
@@ -41,6 +43,7 @@ interface IClientContext {
   contact: IContact[];
   setContact: Dispatch<SetStateAction<IContact[]>>;
   updateClient: (clientData: IClientUpdate) => void;
+  updateContact: (contactData: IContactUpdate, contactId: string) => void;
 }
 
 export const ClientContext = createContext({} as IClientContext);
@@ -233,6 +236,31 @@ export function ClientProvider({ children }: IClientContextProps) {
     }
   }
 
+  async function updateContact(contactData: IClientUpdate, contactId: string) {
+    const token = localStorage.getItem("@desafio_token");
+    try {
+      setLoading(true);
+      await RequestContactUpdated(token!, contactData, contactId);
+      toast({
+        title: "Contato atualizado com sucesso",
+        position: "top-right",
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+    } catch {
+      toast({
+        title: "Ops! Algo deu errado",
+        position: "top-right",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <ClientContext.Provider
       value={{
@@ -247,6 +275,7 @@ export function ClientProvider({ children }: IClientContextProps) {
         contact,
         setContact,
         updateClient,
+        updateContact,
       }}
     >
       {children}
