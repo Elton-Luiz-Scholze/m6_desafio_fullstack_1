@@ -12,6 +12,7 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import { FormUpdate } from "../components/FormUpdate";
 import { useUserContext } from "../contexts/clientContext";
 
 export const Dashboard = () => {
@@ -43,6 +44,7 @@ export const Dashboard = () => {
         </Text>
         <Link
           bg={"whatsapp.200"}
+          borderRadius={8}
           p={2}
           color={"black"}
           fontSize={18}
@@ -68,7 +70,7 @@ export const Dashboard = () => {
             <Text>Phone: {client?.phone}</Text>
           </CardBody>
           <CardFooter display={"flex"} justifyContent={"space-between"}>
-            <Button>Atualizar Dados</Button>
+            <FormUpdate />
             <Button>Excluir conta</Button>
           </CardFooter>
         </Card>
@@ -110,8 +112,8 @@ export const Dashboard = () => {
                   <Text>Phone: {contact.phone}</Text>
                 </CardBody>
                 <CardFooter gap={4}>
-                  <Button>Atualizar Dados</Button>
-                  <Button>Excluir conta</Button>
+                  <Button>Atualizar contato</Button>
+                  <Button>Excluir contato</Button>
                 </CardFooter>
               </Card>
             ))
