@@ -17,7 +17,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../contexts/clientContext";
 import { IClientRegister } from "../interfaces";
-import { createClientSchema } from "../schemas/registerShema";
+import { createClientSchema } from "../schemas/registerSchema";
 
 export const Register = () => {
   const [inputName, setInputName] = useState("");
