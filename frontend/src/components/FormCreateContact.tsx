@@ -36,6 +36,9 @@ export const FormCreateContact = () => {
 
   const onFormSubmit = (formData: IContactCreate) => {
     createContact(formData);
+    setInputName("");
+    setInputEmail("");
+    setInputPhone("");
   };
 
   const nameError = inputName === "";

@@ -17,7 +17,8 @@ import { FormUpdate } from "../components/FormUpdate";
 import { useUserContext } from "../contexts/clientContext";
 
 export const Dashboard = () => {
-  const { client, logout, deleteClient, deleteContact } = useUserContext();
+  const { client, logout, deleteClient, deleteContact, contact } =
+    useUserContext();
 
   return (
     <AbsoluteCenter
@@ -97,8 +98,8 @@ export const Dashboard = () => {
           maxW={"100%"}
           flexWrap={"wrap"}
         >
-          {client?.contact ? (
-            client.contact?.map(({ id, name, email, phone }) => (
+          {contact ? (
+            contact.map(({ id, name, email, phone }) => (
               <Card key={id} w={"300px"}>
                 <CardHeader>{name}</CardHeader>
                 <CardBody>
