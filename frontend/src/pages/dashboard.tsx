@@ -12,11 +12,15 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import { FormCreateContact } from "../components/FormCreateContact";
 import { FormUpdate } from "../components/FormUpdate";
+import { FormUpdateContact } from "../components/FormUpdateContact";
 import { useUserContext } from "../contexts/clientContext";
 
 export const Dashboard = () => {
-  const { client, logout, deleteClient } = useUserContext();
+  const { client, logout, deleteClient, deleteContact, contact } =
+    useUserContext();
+
   return (
     <AbsoluteCenter
       bg={"blackAlpha.600"}
@@ -86,15 +90,7 @@ export const Dashboard = () => {
           >
             Contatos:
           </Text>
-          <Button
-            w={"max-content "}
-            bg={"green.400"}
-            textColor={"white"}
-            _hover={{ bg: "white", textColor: "green" }}
-            fontSize={18}
-          >
-            Incluir contato
-          </Button>
+          <FormCreateContact />
         </Flex>
         <UnorderedList
           display={"flex"}
@@ -103,17 +99,19 @@ export const Dashboard = () => {
           maxW={"100%"}
           flexWrap={"wrap"}
         >
-          {client?.contacts ? (
-            client.contacts?.map((contact) => (
-              <Card key={contact.id} w={"300px"}>
-                <CardHeader>{contact.name}</CardHeader>
+          {contact ? (
+            contact.map(({ id, name, email, phone }) => (
+              <Card key={id} w={"300px"}>
+                <CardHeader>{name}</CardHeader>
                 <CardBody>
-                  <Text>Email: {contact.email}</Text>
-                  <Text>Phone: {contact.phone}</Text>
+                  <Text>Email: {email}</Text>
+                  <Text>Phone: {phone}</Text>
                 </CardBody>
                 <CardFooter gap={4}>
-                  <Button>Atualizar contato</Button>
-                  <Button>Excluir contato</Button>
+                  <FormUpdateContact contactId={id!} />
+                  <Button onClick={() => deleteContact(id!)}>
+                    Excluir contato
+                  </Button>
                 </CardFooter>
               </Card>
             ))

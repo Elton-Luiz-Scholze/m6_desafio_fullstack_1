@@ -15,37 +15,30 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../contexts/clientContext";
-import { IClientUpdate } from "../interfaces";
-import { updateSchema } from "../schemas/updateSchema";
+import { IContactCreate } from "../interfaces";
+import { createContactSchema } from "../schemas/createContactSchema";
 
-export const FormUpdate = () => {
+export const FormCreateContact = () => {
   const [inputName, setInputName] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPhone, setInputPhone] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { client, updateClient } = useUserContext();
+  const { createContact } = useUserContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IClientUpdate>({
-    resolver: yupResolver(updateSchema),
+  } = useForm<IContactCreate>({
+    resolver: yupResolver(createContactSchema),
   });
 
-  const onFormSubmit = (formData: IClientUpdate) => {
-    if (formData.name == "") {
-      formData.name = client?.name;
-    }
-    if (formData.email == "") {
-      formData.email = client?.email;
-    }
-    if (formData.phone == "") {
-      formData.phone = client?.phone;
-    }
-
-    updateClient(formData);
+  const onFormSubmit = (formData: IContactCreate) => {
+    createContact(formData);
+    setInputName("");
+    setInputEmail("");
+    setInputPhone("");
   };
 
   const nameError = inputName === "";
@@ -54,10 +47,19 @@ export const FormUpdate = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Atualizar Dados</Button>
+      <Button
+        w={"max-content "}
+        bg={"green.400"}
+        textColor={"white"}
+        _hover={{ bg: "white", textColor: "green" }}
+        fontSize={18}
+        onClick={onOpen}
+      >
+        Incluir contato
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bg={"blackAlpha.900"}>
-          <ModalHeader color={"green.200"}>Atualize seus dados</ModalHeader>
+          <ModalHeader color={"green.200"}>Crie um contato</ModalHeader>
           <ModalBody pb={6}>
             <FormControl id="name" isRequired isInvalid={nameError}>
               <FormLabel textColor={"white"}>Nome</FormLabel>
@@ -101,7 +103,7 @@ export const FormUpdate = () => {
                 fontSize={20}
                 onClick={handleSubmit(onFormSubmit)}
               >
-                Atualizar
+                Cadastrar
               </Button>
               <Button
                 bg={"green"}
