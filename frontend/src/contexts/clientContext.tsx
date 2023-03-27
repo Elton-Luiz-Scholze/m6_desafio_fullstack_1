@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { IClientLogin, IClientRegister, IClientRes } from "../interfaces";
 import { RequestClientProfile } from "../requests/RequestClientProfile";
 import { RequestClientRegister } from "../requests/RequestClientRegister";
+import { RequestDeleteClient } from "../requests/RequestDeleteClient";
 import { RequestLogin } from "../requests/RequestLogin";
 
 interface IClientContextProps {
@@ -24,6 +25,7 @@ interface IClientContext {
   client: IClientRes | null;
   setClient: Dispatch<SetStateAction<IClientRes | null>>;
   logout: () => void;
+  deleteClient: () => void;
 }
 
 export const ClientContext = createContext({} as IClientContext);
@@ -111,9 +113,33 @@ export function ClientProvider({ children }: IClientContextProps) {
     navigate("/login");
   }
 
+  async function deleteClient() {
+    const token = localStorage.getItem("@desafio_token");
+    try {
+      await RequestDeleteClient(token!);
+      toast({
+        title: "Conta deletada com sucesso",
+        position: "top-right",
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+      localStorage.removeItem("@desafio_token");
+      navigate("/");
+    } catch {
+      toast({
+        title: "Ocorreu um erro ao tentar excluir sua conta!",
+        position: "top-right",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
+    }
+  }
+
   return (
     <ClientContext.Provider
-      value={{ client, setClient, clientRegister, login, logout }}
+      value={{ client, setClient, clientRegister, login, logout, deleteClient }}
     >
       {children}
     </ClientContext.Provider>

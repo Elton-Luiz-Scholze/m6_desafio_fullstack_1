@@ -16,7 +16,7 @@ import { FormUpdate } from "../components/FormUpdate";
 import { useUserContext } from "../contexts/clientContext";
 
 export const Dashboard = () => {
-  const { client, logout } = useUserContext();
+  const { client, logout, deleteClient } = useUserContext();
   return (
     <AbsoluteCenter
       bg={"blackAlpha.600"}
@@ -71,7 +71,7 @@ export const Dashboard = () => {
           </CardBody>
           <CardFooter display={"flex"} justifyContent={"space-between"}>
             <FormUpdate />
-            <Button>Excluir conta</Button>
+            <Button onClick={() => deleteClient()}>Excluir conta</Button>
           </CardFooter>
         </Card>
       </Container>
