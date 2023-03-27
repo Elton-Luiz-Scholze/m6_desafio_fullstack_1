@@ -24,7 +24,7 @@ export const FormUpdate = () => {
   const [inputPhone, setInputPhone] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { client } = useUserContext();
+  const { client, updateClient } = useUserContext();
 
   const {
     register,
@@ -45,7 +45,7 @@ export const FormUpdate = () => {
       formData.phone = client?.phone;
     }
 
-    console.log(formData);
+    updateClient(formData);
   };
 
   const nameError = inputName === "";
@@ -57,7 +57,7 @@ export const FormUpdate = () => {
       <Button onClick={onOpen}>Atualizar Dados</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bg={"blackAlpha.900"}>
-          <ModalHeader color={"green.200"}>Crie sua conta</ModalHeader>
+          <ModalHeader color={"green.200"}>Atualize seus dados</ModalHeader>
           <ModalBody pb={6}>
             <FormControl id="name" isRequired isInvalid={nameError}>
               <FormLabel textColor={"white"}>Nome</FormLabel>
@@ -101,7 +101,7 @@ export const FormUpdate = () => {
                 fontSize={20}
                 onClick={handleSubmit(onFormSubmit)}
               >
-                Cadastrar
+                Atualizar
               </Button>
               <Button
                 bg={"green"}
