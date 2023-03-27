@@ -12,11 +12,13 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import { FormCreateContact } from "../components/FormCreateContact";
 import { FormUpdate } from "../components/FormUpdate";
 import { useUserContext } from "../contexts/clientContext";
 
 export const Dashboard = () => {
   const { client, logout, deleteClient, deleteContact } = useUserContext();
+
   return (
     <AbsoluteCenter
       bg={"blackAlpha.600"}
@@ -86,15 +88,7 @@ export const Dashboard = () => {
           >
             Contatos:
           </Text>
-          <Button
-            w={"max-content "}
-            bg={"green.400"}
-            textColor={"white"}
-            _hover={{ bg: "white", textColor: "green" }}
-            fontSize={18}
-          >
-            Incluir contato
-          </Button>
+          <FormCreateContact />
         </Flex>
         <UnorderedList
           display={"flex"}

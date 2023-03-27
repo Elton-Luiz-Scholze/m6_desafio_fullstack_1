@@ -9,9 +9,16 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { IClientLogin, IClientRegister, IClientRes } from "../interfaces";
+import {
+  IClientLogin,
+  IClientRegister,
+  IClientRes,
+  IContact,
+  IContactCreate,
+} from "../interfaces";
 import { RequestClientProfile } from "../requests/RequestClientProfile";
 import { RequestClientRegister } from "../requests/RequestClientRegister";
+import { RequestCreateContact } from "../requests/RequestCreateContact";
 import { RequestDeleteClient } from "../requests/RequestDeleteClient";
 import { RequestDeleteContact } from "../requests/RequestDeleteContact";
 import { RequestLogin } from "../requests/RequestLogin";
@@ -28,6 +35,7 @@ interface IClientContext {
   logout: () => void;
   deleteClient: () => void;
   deleteContact: (contactId: string) => void;
+  createContact: (contactData: IContactCreate) => void;
 }
 
 export const ClientContext = createContext({} as IClientContext);
@@ -161,6 +169,28 @@ export function ClientProvider({ children }: IClientContextProps) {
     }
   }
 
+  async function createContact(contactData: IContactCreate) {
+    const token = localStorage.getItem("@desafio_token");
+    try {
+      await RequestCreateContact(token!, contactData);
+      toast({
+        title: "Contato criado com sucesso",
+        position: "top-right",
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+    } catch {
+      toast({
+        title: "Ops! Algo deu errado",
+        position: "top-right",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
+    }
+  }
+
   return (
     <ClientContext.Provider
       value={{
@@ -171,6 +201,7 @@ export function ClientProvider({ children }: IClientContextProps) {
         logout,
         deleteClient,
         deleteContact,
+        createContact,
       }}
     >
       {children}
