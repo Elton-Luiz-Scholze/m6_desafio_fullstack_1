@@ -99,7 +99,7 @@ export const Dashboard = () => {
           maxW={"100%"}
           flexWrap={"wrap"}
         >
-          {contact ? (
+          {contact.length > 0 ? (
             contact.map(({ id, name, email, phone }) => (
               <Card key={id} w={"300px"}>
                 <CardHeader>{name}</CardHeader>
