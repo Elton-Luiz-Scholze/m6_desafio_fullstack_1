@@ -137,7 +137,6 @@ export function ClientProvider({ children }: IClientContextProps) {
   async function deleteClient() {
     const token = localStorage.getItem("@desafio_token");
     try {
-      setLoading(true);
       await RequestDeleteClient(token!);
       toast({
         title: "Conta deletada com sucesso",
@@ -156,8 +155,6 @@ export function ClientProvider({ children }: IClientContextProps) {
         duration: 2500,
         isClosable: true,
       });
-    } finally {
-      setLoading(false);
     }
   }
 
