@@ -4,9 +4,14 @@ import jwt from "jsonwebtoken";
 import { AppError } from "../errors/errors";
 
 export const loginService = async (data: IClientLogin) => {
-  const client = await clientRepository.findOneByOrFail({ email: data.email });
+  const client = await clientRepository.findOne({
+    relations: { contact: true },
+    where: {
+      email: data.email,
+    },
+  });
 
-  if (!client.isActive) {
+  if (!client?.isActive) {
     throw new AppError(400, "User is not active");
   }
 
