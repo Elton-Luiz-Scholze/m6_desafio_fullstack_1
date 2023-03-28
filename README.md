@@ -10,26 +10,19 @@
 
 <a href="https://documentation-register-fullstack.vercel.app/" target="_blank">Link da documentação</a>
 
-<ol>
-  <li>
-    Faça o clone do reposítório na sua máquina clicando no botão verde escrito <>Code e selecionando a opção de sua escolha.
-  </li>
-  <li>
-    No terminal do seu computador digite o comando git clone opção_que_selecionou_acima aperte enter e aguarde finalizar.
-  </li>
-  <li>
-    Digite o comando cd m6_desafio_fullstack_1 e aperte enter
-  </li>
-  <li>
-    Digite Code . e aperte enter e a pasta será aberta no VSCode
-  </li>
-  <li>
-    Criar o banco de dados no PostgreSQL.
-  </li>
-  <li>
-    Pode seguir para os passos do backend.
-  </li>
-</ol>
+
+1- Faça o clone do reposítório na sua máquina clicando no botão verde escrito <>Code e selecionando a opção de sua escolha e copie o conteúdo.
+</br>
+2- No terminal do seu computador digite o comando `git clone opção_que_copiou_acima` aperte enter e aguarde finalizar.
+</br>
+3- Digite o comando `cd m6_desafio_fullstack_1` e aperte enter
+</br>
+4- Digite `Code .` e aperte enter e a pasta será aberta no VSCode
+</br>
+5- Criar o banco de dados no PostgreSQL se ainda não tiver criado.
+</br>
+6- Pode seguir para os passos do backend.
+</br>
 
 <h2 align=center>
 	Register-FullStack (BackEnd):
@@ -38,24 +31,18 @@
 <p>
   Para iniciar a Api(backEnd) siga os passos a seguir:
 </p>
+</br>
 
-<ol>
-  <li>
-    No terminal do VSCode digite: "cd backend".
-  </li>
-  <li>
-    Crie um arquivo chamado.env e preencha os campos informado no .env.example passando suas credencias. 
-  </li>
-  <li>
-    No terminal do VSCode digite: "npm install" ou "yarn" Para instalar as dependências.
-  </li>
-  <li>
-    No terminal do VSCode digite: "npm run migration_run" ou "yarn migration_run" Para gerar as migrações.
-  </li>
-  <li>
-    No terminal do VSCode digite: "npm run dev" ou "yarn dev" Para iniciar a aplicação.
-  </li>
-</ol>
+1- No terminal do VSCode digite: `cd backend`.
+</br>
+2- Crie um arquivo chamado `.env` e preencha os campos conforme informado no `.env.example` passando suas credencias. 
+</br>
+3- No terminal do VSCode digite: `npm install` ou `yarn` Para instalar as dependências.
+</br>
+4- No terminal do VSCode digite: `npm run migration_run` ou `yarn migration_run` Para gerar as migrações.
+</br>
+5- No terminal do VSCode digite: `npm run dev` ou `yarn dev` Para iniciar a aplicação.
+
 
 <h2 align=center>
 	Register-FullStack (FrontEnd):
@@ -64,21 +51,15 @@
 <p>
   Para iniciar o frontEnd siga os passos a seguir:
 </p>
+</br>
 
-<ol>
-  <li>
-    No terminal do VSCode abra um novo terminal e digite: "cd front-end".
-  </li>
-  <li>
-    No terminal do VSCode digite: "npm install" ou "yarn" Para instalar as dependencias.
-  </li>
-  <li>
-    No terminal do VSCode digite: "npm run dev" ou "yarn dev" Para iniciar a aplicação.
-  </li>
-  <li>
-    Clique no link que foi informado no terminal após a execução do comando segurando a tecla "ctrl"
-  </li>
-  <li>
-    Para o FrontEnd funcionar corretamente o BackEnd deve estar rodando também.
-  </li>
-<ol>
+1- No terminal do VSCode abra um novo terminal e digite: `cd frontend`.
+</br>
+2- No terminal do VSCode digite: `npm install` ou `yarn` Para instalar as dependencias.
+</br>
+3- No terminal do VSCode digite: `npm run dev` ou `yarn dev` Para iniciar a aplicação.
+</br>
+4- Clique no link que foi informado no terminal após a execução do comando segurando a tecla "ctrl"
+</br>
+5- Para o FrontEnd funcionar corretamente o BackEnd deve estar rodando também.
+</br>
