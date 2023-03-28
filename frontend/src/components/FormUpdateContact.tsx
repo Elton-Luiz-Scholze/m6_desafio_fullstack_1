@@ -15,37 +15,42 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../contexts/clientContext";
-import { IClientUpdate } from "../interfaces";
+import { IContactUpdate } from "../interfaces";
 import { updateSchema } from "../schemas/updateSchema";
 
-export const FormUpdate = () => {
+interface IProps {
+  contactId: string;
+}
+
+export const FormUpdateContact = ({ contactId }: IProps) => {
   const [inputName, setInputName] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPhone, setInputPhone] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { client, updateClient } = useUserContext();
+  const { contact, updateContact } = useUserContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IClientUpdate>({
+  } = useForm<IContactUpdate>({
     resolver: yupResolver(updateSchema),
   });
 
-  const onFormSubmit = (formData: IClientUpdate) => {
+  const onFormSubmit = (formData: IContactUpdate) => {
+    const contactUpdate = contact.find((contact) => contact.id === contactId);
     if (formData.name == "") {
-      formData.name = client?.name;
+      formData.name = contactUpdate?.name;
     }
     if (formData.email == "") {
-      formData.email = client?.email;
+      formData.email = contactUpdate?.email;
     }
     if (formData.phone == "") {
-      formData.phone = client?.phone;
+      formData.phone = contactUpdate?.phone;
     }
 
-    updateClient(formData);
+    updateContact(formData, contactUpdate?.id!);
   };
 
   const nameError = inputName === "";
@@ -57,7 +62,7 @@ export const FormUpdate = () => {
       <Button onClick={onOpen}>Atualizar Dados</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bg={"blackAlpha.900"}>
-          <ModalHeader color={"green.200"}>Atualize seus dados</ModalHeader>
+          <ModalHeader color={"green.200"}>Atualize seu contato</ModalHeader>
           <ModalBody pb={6}>
             <FormControl id="name" isRequired isInvalid={nameError}>
               <FormLabel textColor={"white"}>Nome</FormLabel>

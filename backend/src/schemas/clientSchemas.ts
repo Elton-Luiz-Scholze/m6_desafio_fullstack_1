@@ -15,14 +15,14 @@ export const createClientSchema: yup.Schema<IClientReq> = yup.object().shape({
 });
 
 export const returnClientSchema: yup.Schema<IClientRes> = yup.object().shape({
-  id: yup.string(),
-  name: yup.string(),
-  email: yup.string().email(),
-  phone: yup.string(),
-  isActive: yup.boolean(),
-  createdAt: yup.date(),
-  updatedAt: yup.date(),
   contact: yup.array(ContactSchema),
+  updatedAt: yup.date(),
+  createdAt: yup.date(),
+  isActive: yup.boolean(),
+  phone: yup.string(),
+  email: yup.string().email(),
+  name: yup.string(),
+  id: yup.string(),
 });
 
 export const returnAllClientsSchema = yup.array(returnClientSchema);
@@ -35,8 +35,8 @@ export const loginSchema: yup.Schema<IClientLogin> = yup.object().shape({
 export const updateClientSchema: yup.Schema<IClientUpdate> = yup
   .object()
   .shape({
-    name: yup.string(),
-    email: yup.string().email(),
-    password: yup.string().trim(),
     phone: yup.string(),
+    password: yup.string().trim(),
+    email: yup.string().email(),
+    name: yup.string(),
   });
