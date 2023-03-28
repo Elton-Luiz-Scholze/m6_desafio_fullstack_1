@@ -8,6 +8,8 @@
  </strong>
 </p>
 
+<a href="https://documentation-register-fullstack.vercel.app/" target="_blank">Link da documentação</a>
+
 <ol>
   <li>
     Faça o clone do reposítório na sua máquina clicando no botão verde escrito <>Code e selecionando a opção de sua escolha.
