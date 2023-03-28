@@ -13,24 +13,24 @@ export const createContactSchema: yup.Schema<IContactReq> = yup.object().shape({
 });
 
 export const ContactSchema: yup.Schema<IContact> = yup.object().shape({
-  id: yup.string(),
-  name: yup.string(),
-  email: yup.string().email(),
   phone: yup.string(),
+  email: yup.string().email(),
+  name: yup.string(),
+  id: yup.string(),
 });
 
 export const returnContactSchema: yup.Schema<IContactRes> = yup.object().shape({
-  id: yup.string(),
-  name: yup.string(),
-  email: yup.string().email(),
-  phone: yup.string(),
-  isActive: yup.boolean(),
-  createdAt: yup.date(),
-  updatedAt: yup.date(),
   client: yup.object().shape({
     id: yup.string(),
     name: yup.string(),
   }),
+  updatedAt: yup.date(),
+  createdAt: yup.date(),
+  isActive: yup.boolean(),
+  phone: yup.string(),
+  email: yup.string().email(),
+  name: yup.string(),
+  id: yup.string(),
 });
 
 export const returnedAllContactsSchema = yup.array(returnContactSchema);
@@ -38,11 +38,11 @@ export const returnedAllContactsSchema = yup.array(returnContactSchema);
 export const updateContactSchema: yup.Schema<IContactUpdate> = yup
   .object()
   .shape({
-    name: yup.string().trim(),
-    email: yup.string().email().trim(),
-    phone: yup.string().trim(),
     client: yup.object().shape({
       id: yup.string(),
       name: yup.string(),
     }),
+    phone: yup.string().trim(),
+    email: yup.string().email().trim(),
+    name: yup.string().trim(),
   });

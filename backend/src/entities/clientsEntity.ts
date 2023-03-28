@@ -1,4 +1,4 @@
-import { hashSync } from "bcryptjs";
+import { getRounds, hashSync } from "bcryptjs";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -43,7 +43,10 @@ class Client {
   @BeforeUpdate()
   @BeforeInsert()
   hashPassWord() {
-    this.password = hashSync(this.password, 10);
+    const is_encrypted = getRounds(this.password);
+    if (!is_encrypted) {
+      this.password = hashSync(this.password, 10);
+    }
   }
 }
 

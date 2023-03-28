@@ -18,8 +18,8 @@ export const clientRoutes = Router();
 
 clientRoutes.post(
   "",
-  verifyClientAlreadyExists,
   validateSchemaMiddleware(createClientSchema),
+  verifyClientAlreadyExists,
   createClientController,
 );
 clientRoutes.get("", listAllClientsController);
@@ -30,8 +30,8 @@ clientRoutes.get(
 );
 clientRoutes.patch(
   "",
-  validateAuthTokenMiddleware,
   validateSchemaMiddleware(updateClientSchema),
+  validateAuthTokenMiddleware,
   updateClientController,
 );
 clientRoutes.delete("", validateAuthTokenMiddleware, deleteClientController);
